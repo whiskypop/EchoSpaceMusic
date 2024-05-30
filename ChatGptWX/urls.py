@@ -17,8 +17,14 @@ from django.contrib import admin
 from django.urls import path
 
 from ChatGptWX.chatitf import call_prompt
+from ChatGptWX.chatitf import upload_image
+from writeapp.views import write_song
+from writeapp.views import check_job_status
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('chat_itf/', call_prompt),
+    path('upload_image/', upload_image),
+    path('write/', write_song, name='write_song'),
+    path('job-status/<uuid:job_id>/', check_job_status),
 ]

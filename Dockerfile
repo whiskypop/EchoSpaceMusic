@@ -17,11 +17,23 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tencent.com/g' /etc/apk/repositorie
 RUN apk update && apk add python3-dev \
                         gcc \
                         libc-dev
+# 安装必要的包
+RUN apk update && apk add --no-cache \
+    gcc \
+    musl-dev \
+    unixodbc-dev \
+    && pip install --upgrade pip
 # 安装编译环境
 RUN apk add build-base
 
+# 安装 nc
+RUN apk add --no-cache netcat-openbsd
+
+RUN pip install pyodbc==5.1.0
+
 # 拷贝当前项目到/app目录下(.dockerignore中文件除外)
 COPY . /app
+# COPY . .
 
 # 设定当前的工作目录
 WORKDIR /app
@@ -42,3 +54,5 @@ EXPOSE 8080
 # 写多行独立的CMD命令是错误写法！只有最后一行CMD命令会被执行，之前的都会被忽略，导致业务报错。
 # 请参考[Docker官方文档之CMD命令](https://docs.docker.com/engine/reference/builder/#cmd)
 CMD python3 manage.py runserver 0.0.0.0:8080
+
+
