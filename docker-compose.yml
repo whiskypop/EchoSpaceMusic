@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./ChatGptWxBackend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - suno-api-new
+
+  suno-api-new:
+    build:
+      context: ./suno-api-new
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+# version: '3'
+# services:
+#   sunoapi:
+#     image: f038454aeff5
+#     container_name: SunoApi
+#     ports:
+#       - "3000:3000"
+#     networks:
+#       - mynetwork
+
+#   backend:
+#     image: 465d8cc339dd
+#     container_name: Backend
+#     ports:
+#       - "8080:8080"
+#     networks:
+#       - mynetwork
+
+# networks:
+#   mynetwork:
+#     driver: bridge

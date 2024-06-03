@@ -1,0 +1,6 @@
+[submodule "ChatGptWxBackend"]
+	path = ChatGptWxBackend
+	url = https://github.com/whiskypop/EchoSpaceMusic.git
+[submodule "suno-api-new"]
+	path = suno-api-new
+	url = https://github.com/whiskypop/EchoSpaceMusic.git
